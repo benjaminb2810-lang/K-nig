@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Königs Gaststätte – Unterschleißheim</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --black: #0d0d0d;
+  --near-black: #141414;
+  --dark: #1c1c1c;
+  --mid: #2a2a2a;
+  --border: #2f2f2f;
+  --muted: #888;
+  --text: #e8e8e8;
+  --text-dim: #aaa;
+  --accent: #c9a84c;
+  --accent-dim: rgba(201,168,76,0.15);
+  --accent-bright: #e8c46a;
+  --white: #f5f5f5;
+  --red: #c0392b;
+  --radius: 8px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--black);
+  color: var(--text);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ─── SCROLLBAR ─── */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--black); }
+::-webkit-scrollbar-thumb { background: var(--accent); border-radius: 3px; }
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 2.5rem; height: 64px;
+  background: rgba(13,13,13,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  transition: background 0.3s;
+}
+.nav-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.35rem; font-weight: 700;
+  color: var(--white); text-decoration: none;
+  letter-spacing: -0.01em;
+}
+.nav-brand span { color: var(--accent); }
+.nav-links { display: flex; gap: 2.5rem; list-style: none; align-items: center; }
+.nav-links a {
+  color: var(--text-dim); text-decoration: none;
+  font-size: 0.85rem; font-weight: 500; letter-spacing: 0.04em;
+  text-transform: uppercase; transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--white); }
+.nav-cta {
+  background: var(--accent) !important; color: var(--black) !important;
+  padding: 0.5rem 1.3rem; border-radius: var(--radius);
+  font-weight: 600 !important; transition: background 0.2s, transform 0.2s !important;
+}
+.nav-cta:hover { background: var(--accent-bright) !important; transform: translateY(-1px); }
+
+/* Social icons nav */
+.nav-socials { display: flex; gap: 0.8rem; align-items: center; }
+.nav-socials a {
+  color: var(--muted); text-decoration: none;
+  width: 34px; height: 34px; border-radius: 50%;
+  border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.9rem; transition: all 0.2s;
+}
+.nav-socials a:hover { border-color: var(--accent); color: var(--accent); }
+
+/* Burger */
+.burger { display: none; cursor: pointer; flex-direction: column; gap: 5px; background: none; border: none; }
+.burger span { display: block; width: 24px; height: 2px; background: var(--text); border-radius: 2px; transition: all 0.3s; }
+.mobile-nav {
+  display: none; position: fixed; top: 64px; left: 0; right: 0;
+  background: var(--near-black); border-bottom: 1px solid var(--border);
+  z-index: 99; flex-direction: column;
+}
+.mobile-nav.open { display: flex; }
+.mobile-nav a {
+  color: var(--text); text-decoration: none; padding: 1rem 2rem;
+  font-size: 0.95rem; font-weight: 500; border-bottom: 1px solid var(--border);
+  transition: background 0.2s;
+}
+.mobile-nav a:hover { background: var(--mid); }
+
+/* ─── HERO ─── */
+#hero {
+  min-height: 100svh;
+  display: grid; grid-template-columns: 1fr 1fr;
+  align-items: stretch;
+  padding-top: 64px;
+}
+.hero-left {
+  display: flex; flex-direction: column; justify-content: center;
+  padding: 5rem 4rem 5rem 2.5rem;
+  background: var(--near-black);
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 0.6rem;
+  font-size: 0.75rem; font-weight: 600; letter-spacing: 0.12em;
+  text-transform: uppercase; color: var(--accent);
+  margin-bottom: 1.5rem;
+}
+.hero-eyebrow::before { content: ''; display: block; width: 24px; height: 1px; background: var(--accent); }
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(2.8rem, 5vw, 4.5rem);
+  font-weight: 900; line-height: 1.05;
+  color: var(--white); margin-bottom: 1.5rem;
+  letter-spacing: -0.02em;
+}
+.hero-title em { font-style: italic; color: var(--accent); }
+.hero-desc {
+  font-size: 1rem; line-height: 1.75; color: var(--text-dim);
+  max-width: 440px; margin-bottom: 2.5rem;
+}
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.85rem 1.8rem; border-radius: var(--radius);
+  font-weight: 600; font-size: 0.9rem; text-decoration: none;
+  letter-spacing: 0.02em; cursor: pointer; border: none;
+  transition: all 0.2s;
+}
+.btn-gold { background: var(--accent); color: var(--black); }
+.btn-gold:hover { background: var(--accent-bright); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(201,168,76,0.3); }
+.btn-ghost { background: transparent; color: var(--text); border: 1px solid var(--border); }
+.btn-ghost:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
+.hero-stats {
+  display: flex; gap: 2.5rem; margin-top: 3rem;
+  padding-top: 2rem; border-top: 1px solid var(--border);
+}
+.stat-item .num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem; font-weight: 700; color: var(--white); line-height: 1;
+}
+.stat-item .lbl { font-size: 0.78rem; color: var(--muted); margin-top: 0.3rem; letter-spacing: 0.05em; }
+.hero-right {
+  position: relative; overflow: hidden;
+}
+.hero-right img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;
+  filter: brightness(0.65) saturate(0.8);
+}
+.hero-right-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(13,13,13,0.5) 0%, transparent 60%);
+}
+.hero-badge {
+  position: absolute; bottom: 2.5rem; right: 2.5rem;
+  background: rgba(13,13,13,0.85); backdrop-filter: blur(12px);
+  border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 1rem 1.3rem; text-align: center;
+}
+.hero-badge .b-num { font-size: 1.8rem; font-weight: 700; color: var(--accent); line-height: 1; }
+.hero-badge .b-stars { color: var(--accent); font-size: 0.8rem; margin-top: 0.2rem; }
+.hero-badge .b-label { font-size: 0.7rem; color: var(--muted); margin-top: 0.2rem; }
+.hero-tag {
+  position: absolute; top: 2rem; left: 2rem;
+  background: var(--accent); color: var(--black);
+  font-size: 0.75rem; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; padding: 0.4rem 0.9rem; border-radius: 30px;
+}
+
+/* ─── SECTION BASE ─── */
+section { padding: 5rem 2.5rem; }
+.sec-inner { max-width: 1140px; margin: 0 auto; }
+.sec-label {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  font-size: 0.72rem; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 1rem;
+}
+.sec-label::before { content: ''; width: 20px; height: 1px; background: var(--accent); }
+.sec-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 700; color: var(--white); line-height: 1.15;
+  letter-spacing: -0.02em; margin-bottom: 1rem;
+}
+.sec-sub { font-size: 1rem; color: var(--text-dim); line-height: 1.65; max-width: 560px; }
+.divider { width: 100%; height: 1px; background: var(--border); margin: 3rem 0; }
+
+/* ─── ÜBER UNS ─── */
+#ueber { background: var(--near-black); }
+.about-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 5rem; align-items: center; margin-top: 3rem;
+}
+.about-img-wrap { position: relative; border-radius: 12px; overflow: hidden; }
+.about-img-wrap img { width: 100%; display: block; filter: brightness(0.8) saturate(0.9); }
+.about-img-caption {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  padding: 1.5rem; background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
+  font-size: 0.85rem; color: rgba(255,255,255,0.7);
+}
+.about-text p { font-size: 0.97rem; line-height: 1.8; color: var(--text-dim); margin-bottom: 1rem; }
+.about-features { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; margin-top: 1.8rem; }
+.feature-pill {
+  display: flex; align-items: center; gap: 0.6rem;
+  background: var(--mid); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 0.7rem 0.9rem;
+  font-size: 0.85rem; font-weight: 500;
+  transition: border-color 0.2s;
+}
+.feature-pill:hover { border-color: var(--accent); }
+.feature-pill .fp-icon { font-size: 1.1rem; }
+
+/* ─── ÖFFNUNGSZEITEN ─── */
+#zeiten { background: var(--black); padding: 4rem 2.5rem; }
+.zeiten-grid {
+  display: grid; grid-template-columns: repeat(7, 1fr);
+  border: 1px solid var(--border); border-radius: 12px; overflow: hidden;
+  margin-top: 2.5rem;
+}
+.zt-item {
+  padding: 1.5rem 1rem; text-align: center;
+  border-right: 1px solid var(--border);
+  transition: background 0.2s;
+}
+.zt-item:last-child { border-right: none; }
+.zt-item.today { background: var(--accent-dim); }
+.zt-day { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.5rem; }
+.zt-time { font-size: 0.85rem; font-weight: 600; color: var(--white); }
+.zt-closed { color: var(--muted) !important; font-style: italic; font-weight: 400 !important; }
+.zt-note { font-size: 0.7rem; color: var(--accent); margin-top: 0.3rem; }
+
+/* ─── SPEISEKARTE ─── */
+#speise { background: var(--near-black); }
+.menu-tabs {
+  display: flex; gap: 0.4rem; flex-wrap: wrap; margin: 2rem 0 1.5rem;
+  border-bottom: 1px solid var(--border); padding-bottom: 0;
+}
+.tab {
+  background: transparent; border: none; cursor: pointer;
+  color: var(--muted); font-size: 0.85rem; font-weight: 500;
+  padding: 0.7rem 1.2rem; border-bottom: 2px solid transparent;
+  transition: all 0.2s; font-family: inherit;
+  margin-bottom: -1px; letter-spacing: 0.03em;
+}
+.tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+.tab:hover { color: var(--white); }
+.menu-panel { display: none; }
+.menu-panel.active { display: grid; grid-template-columns: repeat(auto-fill, minmax(310px, 1fr)); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; }
+.dish {
+  background: var(--dark); padding: 1.3rem 1.5rem;
+  display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem;
+  transition: background 0.2s;
+}
+.dish:hover { background: var(--mid); }
+.dish-name { font-weight: 600; font-size: 0.92rem; color: var(--white); margin-bottom: 0.3rem; }
+.dish-desc { font-size: 0.8rem; color: var(--text-dim); line-height: 1.5; }
+.dish-price { color: var(--accent); font-weight: 700; font-size: 0.95rem; white-space: nowrap; flex-shrink: 0; }
+.highlight-dish { border-left: 3px solid var(--accent); }
+.menu-note { font-size: 0.82rem; color: var(--muted); margin-top: 1rem; text-align: center; }
+
+/* ─── SOCIAL / FACEBOOK ─── */
+#social { background: var(--black); }
+.social-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; margin-top: 2.5rem; }
+.fb-feed-wrap {
+  background: var(--dark); border: 1px solid var(--border);
+  border-radius: 12px; overflow: hidden;
+}
+.fb-feed-header {
+  display: flex; align-items: center; gap: 0.8rem;
+  padding: 1rem 1.3rem; border-bottom: 1px solid var(--border);
+}
+.fb-icon { font-size: 1.3rem; }
+.fb-feed-header strong { font-size: 0.9rem; color: var(--white); }
+.fb-feed-header span { font-size: 0.78rem; color: var(--muted); }
+.fb-post-inner { padding: 1.3rem; }
+.fb-post-meta { display: flex; align-items: center; gap: 0.8rem; margin-bottom: 1rem; }
+.fb-avatar {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: linear-gradient(135deg, #3b5998, #4267B2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; flex-shrink: 0;
+}
+.fb-post-name { font-weight: 600; font-size: 0.88rem; color: var(--white); }
+.fb-post-date { font-size: 0.75rem; color: var(--muted); }
+.fb-post-img {
+  width: 100%; border-radius: 8px; margin-bottom: 0.9rem;
+  object-fit: cover; height: 200px;
+}
+.fb-post-text { font-size: 0.88rem; line-height: 1.65; color: var(--text-dim); margin-bottom: 1rem; }
+.fb-post-actions {
+  display: flex; gap: 1.5rem; padding-top: 0.8rem; border-top: 1px solid var(--border);
+}
+.fb-action {
+  display: flex; align-items: center; gap: 0.4rem;
+  font-size: 0.8rem; color: var(--muted); cursor: pointer;
+  transition: color 0.2s; background: none; border: none; font-family: inherit;
+}
+.fb-action:hover { color: var(--accent); }
+.fb-cta-bar {
+  padding: 1rem 1.3rem; border-top: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.fb-cta-bar a {
+  font-size: 0.8rem; color: var(--accent); text-decoration: none; font-weight: 500;
+  transition: color 0.2s;
+}
+.fb-cta-bar a:hover { color: var(--accent-bright); }
+.fb-notice { font-size: 0.75rem; color: var(--muted); }
+.insta-section { }
+.insta-top { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 1.2rem; border-bottom: 1px solid var(--border); }
+.insta-avatar {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.6rem; flex-shrink: 0;
+}
+.insta-name { font-weight: 700; font-size: 1rem; color: var(--white); }
+.insta-handle { font-size: 0.82rem; color: var(--muted); }
+.insta-btn {
+  margin-left: auto; background: transparent;
+  border: 1px solid var(--border); color: var(--text); padding: 0.45rem 1rem;
+  border-radius: var(--radius); font-size: 0.82rem; font-weight: 600;
+  cursor: pointer; text-decoration: none; transition: all 0.2s;
+}
+.insta-btn:hover { border-color: var(--accent); color: var(--accent); }
+.insta-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 4px;
+  border-radius: 8px; overflow: hidden;
+}
+.insta-item {
+  aspect-ratio: 1; overflow: hidden; position: relative; cursor: pointer;
+}
+.insta-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s, filter 0.3s; filter: brightness(0.85); }
+.insta-item:hover img { transform: scale(1.08); filter: brightness(1); }
+.insta-overlay {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0.4);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity 0.3s;
+  font-size: 1.5rem;
+}
+.insta-item:hover .insta-overlay { opacity: 1; }
+.insta-more {
+  text-align: center; margin-top: 1.2rem;
+}
+.insta-more a {
+  color: var(--accent); text-decoration: none; font-size: 0.85rem; font-weight: 600;
+}
+
+/* ─── BEWERTUNGEN ─── */
+#bewertungen { background: var(--near-black); }
+.rating-bar-section {
+  display: flex; gap: 4rem; align-items: center; margin: 2.5rem 0; flex-wrap: wrap;
+}
+.big-rating { text-align: center; }
+.big-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 5rem; font-weight: 900; color: var(--white); line-height: 1;
+}
+.big-stars { font-size: 1.2rem; color: var(--accent); letter-spacing: 0.1em; margin-top: 0.3rem; }
+.big-count { font-size: 0.8rem; color: var(--muted); margin-top: 0.4rem; }
+.bars { min-width: 240px; }
+.bar-row { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0.55rem; }
+.bar-label { font-size: 0.78rem; color: var(--muted); width: 14px; text-align: right; }
+.bar-track { flex: 1; height: 6px; background: var(--mid); border-radius: 3px; overflow: hidden; }
+.bar-fill { height: 100%; background: var(--accent); border-radius: 3px; }
+.bar-pct { font-size: 0.72rem; color: var(--muted); width: 28px; }
+.source-badges { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+.source-badge {
+  background: var(--mid); border: 1px solid var(--border);
+  border-radius: 30px; padding: 0.35rem 0.9rem;
+  font-size: 0.75rem; color: var(--text-dim); font-weight: 500;
+}
+.reviews-grid {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 1rem; margin-top: 1.5rem;
+}
+.review-card {
+  background: var(--dark); border: 1px solid var(--border);
+  border-radius: 12px; padding: 1.5rem;
+  transition: border-color 0.25s, transform 0.25s;
+}
+.review-card:hover { border-color: rgba(201,168,76,0.4); transform: translateY(-3px); }
+.rc-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 1rem; }
+.rc-avatar {
+  width: 42px; height: 42px; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 1rem; color: var(--black); flex-shrink: 0;
+}
+.rc-stars { font-size: 0.8rem; color: var(--accent); }
+.rc-name { font-weight: 600; font-size: 0.88rem; color: var(--white); }
+.rc-date { font-size: 0.72rem; color: var(--muted); margin-top: 0.15rem; }
+.rc-text { font-size: 0.87rem; line-height: 1.7; color: var(--text-dim); font-style: italic; }
+.rc-source { font-size: 0.72rem; color: var(--muted); margin-top: 0.8rem; text-align: right; }
+
+/* ─── RESERVIERUNG ─── */
+#reservierung { background: var(--black); }
+.booking-grid { display: grid; grid-template-columns: 1fr 1.3fr; gap: 4rem; margin-top: 2.5rem; align-items: start; }
+.booking-info .bi-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem; color: var(--white); margin-bottom: 1rem;
+}
+.booking-info p { font-size: 0.93rem; color: var(--text-dim); line-height: 1.75; margin-bottom: 1.5rem; }
+.contact-list { display: flex; flex-direction: column; gap: 0.75rem; }
+.contact-item {
+  display: flex; align-items: center; gap: 1rem;
+  background: var(--dark); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 0.9rem 1.1rem;
+  text-decoration: none; color: var(--text);
+  transition: border-color 0.2s;
+}
+.contact-item:hover { border-color: var(--accent); }
+.ci-icon { font-size: 1.2rem; flex-shrink: 0; }
+.ci-lbl { font-size: 0.7rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; }
+.ci-val { font-weight: 600; font-size: 0.9rem; color: var(--white); }
+/* Form */
+.booking-form {
+  background: var(--dark); border: 1px solid var(--border);
+  border-radius: 12px; padding: 2rem;
+}
+.booking-form h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem; color: var(--white); margin-bottom: 1.5rem;
+}
+.fg { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.form-group { display: flex; flex-direction: column; gap: 0.35rem; }
+.form-group.span2 { grid-column: 1 / -1; }
+label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.1em; }
+input, select, textarea {
+  background: var(--mid); border: 1px solid var(--border);
+  color: var(--text); padding: 0.7rem 0.9rem; border-radius: 6px;
+  font-size: 0.9rem; font-family: inherit; transition: border-color 0.2s;
+}
+input:focus, select:focus, textarea:focus { outline: none; border-color: var(--accent); }
+select option { background: var(--dark); }
+textarea { resize: vertical; min-height: 80px; }
+.form-btn {
+  width: 100%; margin-top: 1.2rem; padding: 0.9rem;
+  background: var(--accent); color: var(--black); border: none;
+  border-radius: 6px; font-size: 0.95rem; font-weight: 700;
+  cursor: pointer; transition: all 0.2s; font-family: inherit;
+  letter-spacing: 0.03em;
+}
+.form-btn:hover { background: var(--accent-bright); transform: translateY(-1px); }
+.form-footnote { font-size: 0.75rem; color: var(--muted); text-align: center; margin-top: 0.7rem; }
+.success-banner {
+  display: none; background: #1a3a1a; border: 1px solid #3a7a3a;
+  color: #7ec87e; border-radius: 6px; padding: 0.9rem 1.2rem;
+  font-weight: 600; font-size: 0.9rem; margin-top: 1rem; text-align: center;
+}
+
+/* ─── ANFAHRT ─── */
+#anfahrt { background: var(--near-black); }
+.anfahrt-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: 3rem; align-items: start; margin-top: 2.5rem; }
+.anfahrt-info { }
+.info-group { margin-bottom: 1.8rem; }
+.info-group h4 { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 0.6rem; }
+.info-group p { font-size: 0.9rem; color: var(--text-dim); line-height: 1.65; }
+.map-box {
+  border-radius: 12px; overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
+}
+.map-box iframe { display: block; width: 100%; height: 420px; border: none; }
+.map-footer {
+  padding: 1rem 1.3rem; background: var(--dark);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.map-footer span { font-size: 0.82rem; color: var(--muted); }
+.map-footer a { font-size: 0.82rem; color: var(--accent); text-decoration: none; font-weight: 500; }
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--near-black); border-top: 1px solid var(--border);
+  padding: 3rem 2.5rem 2rem;
+}
+.footer-inner { max-width: 1140px; margin: 0 auto; }
+.footer-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 2rem; flex-wrap: wrap; margin-bottom: 2.5rem; }
+.footer-brand { }
+.footer-logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 700; color: var(--white); }
+.footer-logo span { color: var(--accent); }
+.footer-tagline { font-size: 0.82rem; color: var(--muted); margin-top: 0.4rem; }
+.footer-links { display: flex; flex-direction: column; gap: 0.5rem; }
+.footer-links a { font-size: 0.85rem; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--white); }
+.footer-links h4 { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent); margin-bottom: 0.4rem; }
+.footer-socials { display: flex; gap: 0.75rem; }
+.footer-socials a {
+  width: 38px; height: 38px; border-radius: 50%;
+  border: 1px solid var(--border); background: var(--mid);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem; text-decoration: none; color: var(--muted);
+  transition: all 0.2s;
+}
+.footer-socials a:hover { border-color: var(--accent); color: var(--accent); }
+.footer-bottom {
+  display: flex; justify-content: space-between; align-items: center;
+  padding-top: 1.5rem; border-top: 1px solid var(--border); flex-wrap: wrap; gap: 1rem;
+}
+.footer-copy { font-size: 0.78rem; color: var(--muted); }
+.footer-legal { display: flex; gap: 1.5rem; }
+.footer-legal a { font-size: 0.78rem; color: var(--muted); text-decoration: none; }
+.footer-legal a:hover { color: var(--text); }
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 900px) {
+  #hero { grid-template-columns: 1fr; min-height: auto; }
+  .hero-right { height: 320px; }
+  .hero-left { padding: 3rem 1.5rem; }
+  .about-grid, .booking-grid, .anfahrt-grid, .social-grid { grid-template-columns: 1fr; }
+  .zeiten-grid { grid-template-columns: repeat(4, 1fr); }
+  .nav-links { display: none; }
+  .nav-socials { display: none; }
+  .burger { display: flex; }
+  nav { padding: 0 1.5rem; }
+  section { padding: 3.5rem 1.5rem; }
+}
+@media (max-width: 600px) {
+  .zeiten-grid { grid-template-columns: repeat(2, 1fr); }
+  .reviews-grid { grid-template-columns: 1fr; }
+  .fg { grid-template-columns: 1fr; }
+  .hero-stats { gap: 1.5rem; }
+  .about-features { grid-template-columns: 1fr; }
+  .insta-grid { grid-template-columns: repeat(3, 1fr); }
+  footer { padding: 2rem 1.5rem; }
+  .footer-top { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a class="nav-brand" href="#">Königs<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#ueber">Über uns</a></li>
+    <li><a href="#speise">Speisekarte</a></li>
+    <li><a href="#social">Social Media</a></li>
+    <li><a href="#bewertungen">Bewertungen</a></li>
+    <li><a href="#anfahrt">Anfahrt</a></li>
+    <li><a href="#reservierung" class="nav-cta">Reservieren</a></li>
+  </ul>
+  <div class="nav-socials">
+    <a href="https://www.instagram.com/koenigs_gaststaette/" target="_blank" title="Instagram">📸</a>
+    <a href="https://www.facebook.com/p/K%C3%B6nigs-Gastst%C3%A4tte-100054247880693/" target="_blank" title="Facebook">👍</a>
+  </div>
+  <button class="burger" onclick="toggleMenu()" aria-label="Menü öffnen">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="mobile-nav" id="mobileNav">
+  <a href="#ueber" onclick="closeMenu()">Über uns</a>
+  <a href="#speise" onclick="closeMenu()">Speisekarte</a>
+  <a href="#social" onclick="closeMenu()">Social Media</a>
+  <a href="#bewertungen" onclick="closeMenu()">Bewertungen</a>
+  <a href="#anfahrt" onclick="closeMenu()">Anfahrt</a>
+  <a href="#reservierung" onclick="closeMenu()">Reservieren</a>
+  <a href="https://www.instagram.com/koenigs_gaststaette/" target="_blank">Instagram ↗</a>
+  <a href="https://www.facebook.com/p/K%C3%B6nigs-Gastst%C3%A4tte-100054247880693/" target="_blank">Facebook ↗</a>
+</div>
+
+<!-- HERO -->
+<section id="hero" style="padding:0">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Unterschleißheim · Seit Jahren beliebt</div>
+    <h1 class="hero-title">Königs<br><em>Gaststätte</em></h1>
+    <p class="hero-desc">Internationale und deutsche Küche mit großzügigen Portionen, freundlichem Service und gemütlicher Atmosphäre – direkt am Tenniszentrum in Unterschleißheim.</p>
+    <div class="hero-actions">
+      <a href="#reservierung" class="btn btn-gold">Tisch reservieren →</a>
+      <a href="#speise" class="btn btn-ghost">Speisekarte ansehen</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat-item"><div class="num">4.7</div><div class="lbl">Google-Bewertung</div></div>
+      <div class="stat-item"><div class="num">688+</div><div class="lbl">Bewertungen</div></div>
+      <div class="stat-item"><div class="num">Di–So</div><div class="lbl">Geöffnet ab 12 Uhr</div></div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <img src="https://images.unsplash.com/photo-1544025162-d76594e8cef1?w=1200&q=80" alt="Königs Gaststätte Essen">
+    <div class="hero-right-overlay"></div>
+    <div class="hero-tag">Grill · International · Deutsch</div>
+    <div class="hero-badge">
+      <div class="b-num">4.7</div>
+      <div class="b-stars">★★★★★</div>
+      <div class="b-label">Tripadvisor Top 10</div>
+    </div>
+  </div>
+</section>
+
+<!-- ÜBER UNS -->
+<section id="ueber">
+  <div class="sec-inner">
+    <div class="sec-label">Über uns</div>
+    <h2 class="sec-title">Herzlich willkommen<br>in der Königs Gaststätte</h2>
+    <div class="about-grid">
+      <div class="about-img-wrap">
+        <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=700&q=80" alt="Restaurant Ambiente">
+        <div class="about-img-caption">Gemütliches Ambiente · Terrasse im Sommer</div>
+      </div>
+      <div class="about-text">
+        <p>Die Königs Gaststätte ist ein beliebtes Lokal direkt am Tenniszentrum Unterschleißheim – ein Ort, der für seine riesigen Portionen zu fairen Preisen und sein unglaublich nettes Team bekannt ist.</p>
+        <p>Die Küche ist international und deutsch: Vom empfehlenswerten Grillteller und saftigen Schweinemedaillons bis hin zu frischen Salattellern und Pasta – hier ist für jeden etwas dabei. Das Lokal ist zwar klein, aber dafür sehr gemütlich, mit einer schönen Terrasse für den Sommer.</p>
+        <p>Ob nach dem Tennisspiel, zum Mittagessen oder für einen entspannten Abend – die Königs Gaststätte empfängt Sie mit Herzlichkeit und guter Küche.</p>
+        <div class="about-features">
+          <div class="feature-pill"><span class="fp-icon">🔥</span> Grill-Spezialitäten</div>
+          <div class="feature-pill"><span class="fp-icon">🌿</span> Terrasse & Außenbereich</div>
+          <div class="feature-pill"><span class="fp-icon">📶</span> Kostenloses WLAN</div>
+          <div class="feature-pill"><span class="fp-icon">📺</span> TV im Lokal</div>
+          <div class="feature-pill"><span class="fp-icon">🚗</span> Parkplätze vorhanden</div>
+          <div class="feature-pill"><span class="fp-icon">♿</span> Rollstuhlgerecht</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ÖFFNUNGSZEITEN -->
+<section id="zeiten">
+  <div class="sec-inner">
+    <div class="sec-label">Wann wir geöffnet haben</div>
+    <h2 class="sec-title">Öffnungszeiten</h2>
+    <div class="zeiten-grid">
+      <div class="zt-item">
+        <div class="zt-day">Montag</div>
+        <div class="zt-time zt-closed">Geschlossen</div>
+      </div>
+      <div class="zt-item">
+        <div class="zt-day">Dienstag</div>
+        <div class="zt-time">12:00 – 21:00</div>
+      </div>
+      <div class="zt-item">
+        <div class="zt-day">Mittwoch</div>
+        <div class="zt-time">12:00 – 21:00</div>
+      </div>
+      <div class="zt-item">
+        <div class="zt-day">Donnerstag</div>
+        <div class="zt-time">12:00 – 21:00</div>
+      </div>
+      <div class="zt-item">
+        <div class="zt-day">Freitag</div>
+        <div class="zt-time">12:00 – 21:00</div>
+      </div>
+      <div class="zt-item">
+        <div class="zt-day">Samstag</div>
+        <div class="zt-time">12:00 – 21:00</div>
+      </div>
+      <div class="zt-item">
+        <div class="zt-day">Sonntag</div>
+        <div class="zt-time">12:00 – 21:00</div>
+      </div>
+    </div>
+    <p style="font-size:0.8rem;color:var(--muted);text-align:center;margin-top:1rem">Öffnungszeiten können variieren. Bitte rufen Sie im Zweifelsfall vorher an: <a href="tel:+4989310405" style="color:var(--accent)">+49 89 3104050</a></p>
+  </div>
+</section>
+
+<!-- SPEISEKARTE -->
+<section id="speise">
+  <div class="sec-inner">
+    <div class="sec-label">Was wir anbieten</div>
+    <h2 class="sec-title">Speisekarte</h2>
+    <p class="sec-sub">Internationale und deutsche Küche – bekannt für große Portionen und faire Preise. Der Grillteller ist besonders empfehlenswert!</p>
+    <div class="menu-tabs">
+      <button class="tab active" onclick="switchTab(this,'salat')">Salatteller</button>
+      <button class="tab" onclick="switchTab(this,'grill')">Grill & Fleisch</button>
+      <button class="tab" onclick="switchTab(this,'pasta')">Pasta & Mehr</button>
+      <button class="tab" onclick="switchTab(this,'kinder')">Für Kinder</button>
+      <button class="tab" onclick="switchTab(this,'getraenke')">Getränke</button>
+    </div>
+
+    <div class="menu-panel active" id="salat">
+      <div class="dish"><div><div class="dish-name">Salatteller mit Putenstreifen</div><div class="dish-desc">Gemischter Salat mit gegrillten Putenstreifen</div></div><div class="dish-price">13,90 €</div></div>
+      <div class="dish"><div><div class="dish-name">Salatteller mit Schinken, Käse & Ei</div><div class="dish-desc">Hausgemachter Salat mit herzhaften Beilagen</div></div><div class="dish-price">12,90 €</div></div>
+      <div class="dish"><div><div class="dish-name">Salatteller mit Thunfisch</div><div class="dish-desc">Frischer gemischter Salat mit Thunfisch</div></div><div class="dish-price">13,90 €</div></div>
+      <div class="dish"><div><div class="dish-name">Salatteller mit Rinderstreifen</div><div class="dish-desc">Gemischter Salat mit zarten Rinderstreifen</div></div><div class="dish-price">16,90 €</div></div>
+    </div>
+
+    <div class="menu-panel" id="grill">
+      <div class="dish highlight-dish"><div><div class="dish-name">⭐ Grillteller</div><div class="dish-desc">Hausempfehlung – gemischter Grillteller mit Beilagen. Besonders beliebt!</div></div><div class="dish-price">ca. 18,90 €</div></div>
+      <div class="dish"><div><div class="dish-name">Schweinemedaillons mit Pfifferlingen</div><div class="dish-desc">Zarte Schweinemedaillons, saisonal mit Pfifferlingen</div></div><div class="dish-price">ca. 17,90 €</div></div>
+      <div class="dish"><div><div class="dish-name">Putensteak mit Pfifferlingen</div><div class="dish-desc">Saftiges Putensteak, saisonal mit Pfifferlingen</div></div><div class="dish-price">ca. 16,90 €</div></div>
+      <div class="dish"><div><div class="dish-name">Kalbsleber mit Bratkartoffeln & Zwiebeln</div><div class="dish-desc">Traditionell zubereitet – ein Klassiker der deutschen Küche</div></div><div class="dish-price">ca. 16,50 €</div></div>
+      <div class="dish"><div><div class="dish-name">Schnitzel (Puten-/Schwein)</div><div class="dish-desc">Klassisches paniertes Schnitzel mit Beilage nach Wahl</div></div><div class="dish-price">ca. 14,90 €</div></div>
+      <div class="dish"><div><div class="dish-name">Cordon Bleu (Schwein)</div><div class="dish-desc">Gefülltes Schnitzel, paniert, mit Pommes</div></div><div class="dish-price">ca. 15,90 €</div></div>
+    </div>
+
+    <div class="menu-panel" id="pasta">
+      <div class="dish"><div><div class="dish-name">Spaghetti Carbonara</div><div class="dish-desc">Mit Speck und cremiger Sauce</div></div><div class="dish-price">ca. 11,90 €</div></div>
+      <div class="dish"><div><div class="dish-name">Risotto</div><div class="dish-desc">Cremiges Risotto – saisonal variierend</div></div><div class="dish-price">ca. 13,90 €</div></div>
+      <div class="dish"><div><div class="dish-name">Currywurst mit Pommes</div><div class="dish-desc">Klassisch, mit hausgemachter Currysauce</div></div><div class="dish-price">ca. 10,90 €</div></div>
+      <div class="dish"><div><div class="dish-name">Wolfsbarsch</div><div class="dish-desc">Gegrillter Wolfsbarsch mit Beilagen</div></div><div class="dish-price">ca. 18,90 €</div></div>
+    </div>
+
+    <div class="menu-panel" id="kinder">
+      <div class="dish"><div><div class="dish-name">Cordon Bleu (Putenfleisch) – klein</div><div class="dish-desc">Kinder-Portion mit Pommes</div></div><div class="dish-price">12,90 €</div></div>
+      <div class="dish"><div><div class="dish-name">Chicken Nuggets mit Pommes</div><div class="dish-desc">Beliebt bei unseren kleinen Gästen</div></div><div class="dish-price">ca. 9,90 €</div></div>
+    </div>
+
+    <div class="menu-panel" id="getraenke">
+      <div class="dish"><div><div class="dish-name">Bier vom Fass 0,5l</div><div class="dish-desc">Hell oder Weizen</div></div><div class="dish-price">ca. 4,50 €</div></div>
+      <div class="dish"><div><div class="dish-name">Wein & Weinschorle</div><div class="dish-desc">Weiß oder Rot, offen oder in der Flasche</div></div><div class="dish-price">ab 3,90 €</div></div>
+      <div class="dish"><div><div class="dish-name">Alkoholfreie Getränke</div><div class="dish-desc">Cola, Fanta, Wasser, Apfelschorle 0,25l</div></div><div class="dish-price">ab 2,80 €</div></div>
+      <div class="dish"><div><div class="dish-name">Kaffee & Heißgetränke</div><div class="dish-desc">Espresso, Cappuccino, Latte, Tee</div></div><div class="dish-price">ab 2,50 €</div></div>
+    </div>
+
+    <p class="menu-note">Preise ungefähre Angaben · Aktuelle Speisekarte im Lokal oder telefonisch erfragen · Nur Barzahlung · Speisekarte saisonal</p>
+  </div>
+</section>
+
+<!-- SOCIAL MEDIA -->
+<section id="social">
+  <div class="sec-inner">
+    <div class="sec-label">Social Media</div>
+    <h2 class="sec-title">Bleiben Sie auf dem Laufenden</h2>
+    <p class="sec-sub">Folgen Sie uns auf Instagram und Facebook für aktuelle Gerichte, Neuigkeiten und Angebote aus der Königs Gaststätte.</p>
+    <div class="social-grid" style="margin-top:2.5rem">
+
+      <!-- FACEBOOK FEED (simuliert, da Facebook-API öffentlich nicht einbettbar ist) -->
+      <div>
+        <div style="display:flex;align-items:center;gap:0.7rem;margin-bottom:1.2rem">
+          <span style="font-size:1.5rem">👍</span>
+          <div>
+            <div style="font-weight:600;color:var(--white);font-size:0.95rem">Facebook – Letzter Beitrag</div>
+            <div style="font-size:0.78rem;color:var(--muted)">Königs Gaststätte · Unterschleißheim</div>
+          </div>
+          <a href="https://www.facebook.com/p/K%C3%B6nigs-Gastst%C3%A4tte-100054247880693/" target="_blank" class="insta-btn" style="margin-left:auto">Zur Seite ↗</a>
+        </div>
+        <div class="fb-feed-wrap">
+          <div class="fb-feed-header">
+            <div class="fb-icon">📘</div>
+            <div>
+              <strong>Königs Gaststätte</strong>
+              <div><span>Unterschleißheim, Germany</span></div>
+            </div>
+          </div>
+          <div class="fb-post-inner">
+            <div class="fb-post-meta">
+              <div class="fb-avatar">👑</div>
+              <div>
+                <div class="fb-post-name">Königs Gaststätte</div>
+                <div class="fb-post-date">Vor 3 Tagen · Unterschleißheim</div>
+              </div>
+            </div>
+            <img class="fb-post-img" src="https://images.unsplash.com/photo-1593030761757-71fae45fa0e7?w=600&q=80" alt="Aktuelles Gericht">
+            <p class="fb-post-text">🍽️ <strong>„Kalbsleber mit Bratkartoffeln und Zwiebeln"</strong> – Ein Klassiker, der bei uns immer wieder begeistert! Frisch zubereitet, mit goldbraunen Bratkartoffeln. Kommt vorbei – wir freuen uns auf euch! 😊</p>
+            <div class="fb-post-actions">
+              <button class="fb-action">👍 Gefällt mir · 2</button>
+              <button class="fb-action">💬 Kommentar</button>
+              <button class="fb-action">↗ Teilen</button>
+            </div>
+          </div>
+          <div class="fb-cta-bar">
+            <a href="https://www.facebook.com/p/K%C3%B6nigs-Gastst%C3%A4tte-100054247880693/" target="_blank">Alle Beiträge auf Facebook ansehen →</a>
+            <span class="fb-notice">via Facebook</span>
+          </div>
+        </div>
+        <p style="font-size:0.75rem;color:var(--muted);margin-top:0.7rem;line-height:1.5">
+          ℹ️ Facebook-Beiträge können nicht automatisch live eingebettet werden (Facebook-API-Einschränkung). Um immer den neuesten Beitrag zu sehen, besuchen Sie direkt unsere Facebook-Seite.
+        </p>
+      </div>
+
+      <!-- INSTAGRAM -->
+      <div class="insta-section">
+        <div class="insta-top">
+          <div class="insta-avatar">📸</div>
+          <div>
+            <div class="insta-name">Königs Gaststätte</div>
+            <div class="insta-handle">@koenigs_gaststaette</div>
+          </div>
+          <a href="https://www.instagram.com/koenigs_gaststaette/" target="_blank" class="insta-btn">Folgen ↗</a>
+        </div>
+        <div class="insta-grid">
+          <div class="insta-item">
+            <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?w=300&q=75" alt="Gericht">
+            <div class="insta-overlay">❤️</div>
+          </div>
+          <div class="insta-item">
+            <img src="https://images.unsplash.com/photo-1544025162-d76594e8cef1?w=300&q=75" alt="Grill">
+            <div class="insta-overlay">❤️</div>
+          </div>
+          <div class="insta-item">
+            <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=300&q=75" alt="Ambiente">
+            <div class="insta-overlay">❤️</div>
+          </div>
+          <div class="insta-item">
+            <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=300&q=75" alt="Restaurant">
+            <div class="insta-overlay">❤️</div>
+          </div>
+          <div class="insta-item">
+            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=300&q=75" alt="Essen">
+            <div class="insta-overlay">❤️</div>
+          </div>
+          <div class="insta-item">
+            <img src="https://images.unsplash.com/photo-1551782450-a2132b4ba21d?w=300&q=75" alt="Spezialität">
+            <div class="insta-overlay">❤️</div>
+          </div>
+        </div>
+        <div class="insta-more">
+          <a href="https://www.instagram.com/koenigs_gaststaette/" target="_blank">Mehr auf Instagram ansehen →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BEWERTUNGEN -->
+<section id="bewertungen">
+  <div class="sec-inner">
+    <div class="sec-label">Was Gäste sagen</div>
+    <h2 class="sec-title">Bewertungen</h2>
+    <div class="rating-bar-section">
+      <div class="big-rating">
+        <div class="big-num">4.7</div>
+        <div class="big-stars">★★★★★</div>
+        <div class="big-count">688+ Bewertungen</div>
+      </div>
+      <div class="bars">
+        <div class="bar-row"><span class="bar-label">5</span><div class="bar-track"><div class="bar-fill" style="width:72%"></div></div><span class="bar-pct">72%</span></div>
+        <div class="bar-row"><span class="bar-label">4</span><div class="bar-track"><div class="bar-fill" style="width:16%"></div></div><span class="bar-pct">16%</span></div>
+        <div class="bar-row"><span class="bar-label">3</span><div class="bar-track"><div class="bar-fill" style="width:6%"></div></div><span class="bar-pct">6%</span></div>
+        <div class="bar-row"><span class="bar-label">2</span><div class="bar-track"><div class="bar-fill" style="width:3%"></div></div><span class="bar-pct">3%</span></div>
+        <div class="bar-row"><span class="bar-label">1</span><div class="bar-track"><div class="bar-fill" style="width:3%"></div></div><span class="bar-pct">3%</span></div>
+      </div>
+      <div>
+        <p style="font-size:0.78rem;color:var(--muted);margin-bottom:0.8rem">Bewertet auf</p>
+        <div class="source-badges">
+          <span class="source-badge">🔵 Google · 4.6/5</span>
+          <span class="source-badge">🟠 Tripadvisor · 4.7/5</span>
+        </div>
+        <p style="font-size:0.75rem;color:var(--muted);margin-top:1rem">Nr. 10 von 45 Restaurants<br>in Unterschleißheim (Tripadvisor)</p>
+      </div>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="rc-top">
+          <div style="display:flex;align-items:center;gap:0.75rem">
+            <div class="rc-avatar" style="background:#c9a84c">D</div>
+            <div><div class="rc-name">David Pfahler</div><div class="rc-date">Januar 2025 · Google</div></div>
+          </div>
+          <div class="rc-stars">★★★★★</div>
+        </div>
+        <p class="rc-text">„Unglaublich nettes Team, immer freundlich und gut gelaunt."</p>
+        <div class="rc-source">via Google Maps</div>
+      </div>
+      <div class="review-card">
+        <div class="rc-top">
+          <div style="display:flex;align-items:center;gap:0.75rem">
+            <div class="rc-avatar" style="background:#3a6ea5">A</div>
+            <div><div class="rc-name">Anonymer Gast</div><div class="rc-date">2024 · Google</div></div>
+          </div>
+          <div class="rc-stars">★★★★★</div>
+        </div>
+        <p class="rc-text">„Tolles Essen und riesige Portionsgrößen. Hier geht niemand hungrig nach Hause. Sehr freundlich und das Preis-Leistungs-Verhältnis ist ebenfalls sehr gut. Wir kommen wieder."</p>
+        <div class="rc-source">via speisekarte.menu</div>
+      </div>
+      <div class="review-card">
+        <div class="rc-top">
+          <div style="display:flex;align-items:center;gap:0.75rem">
+            <div class="rc-avatar" style="background:#2d7a4f">K</div>
+            <div><div class="rc-name">Kroatien-Fan</div><div class="rc-date">2023 · Google</div></div>
+          </div>
+          <div class="rc-stars">★★★★★</div>
+        </div>
+        <p class="rc-text">„Endlich unseren Lieblings-Kroaten in Unterschleißheim gefunden. Das Königs ist nicht gerade groß, aber dafür die Portionen! Und preislich auch vollkommen in Ordnung. Komme immer wieder gerne."</p>
+        <div class="rc-source">via foodpearl.com</div>
+      </div>
+      <div class="review-card">
+        <div class="rc-top">
+          <div style="display:flex;align-items:center;gap:0.75rem">
+            <div class="rc-avatar" style="background:#7a2d2d">B</div>
+            <div><div class="rc-name">Begeisterter Erstbesucher</div><div class="rc-date">2023</div></div>
+          </div>
+          <div class="rc-stars">★★★★★</div>
+        </div>
+        <p class="rc-text">„Aber Hallo – ich war zum ersten Mal in dieser Gaststätte und war tatsächlich überrascht. Essen ist mehr als reichlich und lecker. Eindeutige Empfehlung, ich komme auf jeden Fall wieder."</p>
+        <div class="rc-source">via speisekarte.menu</div>
+      </div>
+      <div class="review-card">
+        <div class="rc-top">
+          <div style="display:flex;align-items:center;gap:0.75rem">
+            <div class="rc-avatar" style="background:#5a3a8a">S</div>
+            <div><div class="rc-name">Stammgast</div><div class="rc-date">2022 · Tripadvisor</div></div>
+          </div>
+          <div class="rc-stars">★★★★★</div>
+        </div>
+        <p class="rc-text">„Sehr schönes Lokal. Liegt etwas versteckt. Essen war gut und der Service war schnell und freundlich. Gerne wieder!"</p>
+        <div class="rc-source">via Tripadvisor</div>
+      </div>
+      <div class="review-card">
+        <div class="rc-top">
+          <div style="display:flex;align-items:center;gap:0.75rem">
+            <div class="rc-avatar" style="background:#8a5a3a">L</div>
+            <div><div class="rc-name">Lenz Hoerl</div><div class="rc-date">Dezember 2020 · Google</div></div>
+          </div>
+          <div class="rc-stars">★★★★★</div>
+        </div>
+        <p class="rc-text">„Einfach super."</p>
+        <div class="rc-source">via Google Maps</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESERVIERUNG -->
+<section id="reservierung">
+  <div class="sec-inner">
+    <div class="sec-label">Online buchen</div>
+    <h2 class="sec-title">Tisch reservieren</h2>
+    <div class="booking-grid">
+      <div class="booking-info">
+        <p class="bi-title" style="font-family:'Playfair Display',serif;font-size:1.5rem;color:var(--white);margin-bottom:1rem">Wir freuen uns auf Sie!</p>
+        <p>Reservierungen sind besonders am Wochenende empfehlenswert. Bei Gruppen ab 6 Personen bitten wir um telefonische Voranmeldung. Bitte beachten Sie: <strong>Nur Barzahlung möglich.</strong></p>
+        <div class="contact-list">
+          <a href="tel:+4989310405" class="contact-item">
+            <span class="ci-icon">📞</span>
+            <div><div class="ci-lbl">Telefon</div><div class="ci-val">+49 89 3104050</div></div>
+          </a>
+          <a href="mailto:vera.juric40@gmail.com" class="contact-item">
+            <span class="ci-icon">✉️</span>
+            <div><div class="ci-lbl">E-Mail</div><div class="ci-val">vera.juric40@gmail.com</div></div>
+          </a>
+          <div class="contact-item">
+            <span class="ci-icon">📍</span>
+            <div><div class="ci-lbl">Adresse</div><div class="ci-val">Anna-Wimschneider-Str. 7, 85716 Unterschleißheim</div></div>
+          </div>
+          <div class="contact-item">
+            <span class="ci-icon">💵</span>
+            <div><div class="ci-lbl">Zahlung</div><div class="ci-val">Nur Barzahlung</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="booking-form">
+        <h3>Reservierungsanfrage</h3>
+        <div class="fg">
+          <div class="form-group">
+            <label>Vorname</label>
+            <input type="text" id="fname" placeholder="Max">
+          </div>
+          <div class="form-group">
+            <label>Nachname</label>
+            <input type="text" id="lname" placeholder="Mustermann">
+          </div>
+          <div class="form-group">
+            <label>Datum</label>
+            <input type="date" id="date">
+          </div>
+          <div class="form-group">
+            <label>Uhrzeit</label>
+            <select id="time">
+              <option value="">-- wählen --</option>
+              <option>12:00</option><option>12:30</option><option>13:00</option>
+              <option>13:30</option><option>18:00</option><option>18:30</option>
+              <option>19:00</option><option>19:30</option><option>20:00</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Personen</label>
+            <select id="guests">
+              <option>1 Person</option><option>2 Personen</option>
+              <option>3 Personen</option><option selected>4 Personen</option>
+              <option>5 Personen</option><option>6+ Personen</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>Telefon</label>
+            <input type="tel" id="phone" placeholder="+49…">
+          </div>
+          <div class="form-group span2">
+            <label>E-Mail</label>
+            <input type="email" id="email" placeholder="ihre@email.de">
+          </div>
+          <div class="form-group span2">
+            <label>Anmerkungen (optional)</label>
+            <textarea id="notes" placeholder="Allergien, besondere Anlässe …"></textarea>
+          </div>
+        </div>
+        <button class="form-btn" onclick="submitForm()">Anfrage absenden →</button>
+        <p class="form-footnote">Bestätigung erfolgt telefonisch oder per E-Mail innerhalb von 24h</p>
+        <div class="success-banner" id="successBanner">✓ Anfrage gesendet! Wir melden uns bald bei Ihnen.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ANFAHRT -->
+<section id="anfahrt">
+  <div class="sec-inner">
+    <div class="sec-label">So finden Sie uns</div>
+    <h2 class="sec-title">Anfahrt</h2>
+    <div class="anfahrt-grid">
+      <div class="anfahrt-info">
+        <div class="info-group">
+          <h4>📍 Adresse</h4>
+          <p>Anna-Wimschneider-Straße 7<br>85716 Unterschleißheim<br>Bayern, Deutschland<br><em style="font-size:0.85rem">Am Tenniszentrum Unterschleißheim</em></p>
+        </div>
+        <div class="info-group">
+          <h4>🚇 S-Bahn</h4>
+          <p>S1 bis Unterschleißheim, dann ca. 10 Minuten zu Fuß oder mit dem Bus.</p>
+        </div>
+        <div class="info-group">
+          <h4>🚗 Auto & Parken</h4>
+          <p>Parkmöglichkeiten am Tenniszentrum. Nächster öffentlicher Parkplatz ca. 732 m entfernt.</p>
+        </div>
+        <div class="info-group">
+          <h4>📞 Telefon</h4>
+          <p><a href="tel:+4989310405" style="color:var(--accent);font-weight:600">+49 89 3104050</a></p>
+        </div>
+        <a href="https://maps.google.com/maps?q=Anna-Wimschneider-Stra%C3%9Fe+7,+85716+Unterschlei%C3%9Fheim" target="_blank" class="btn btn-gold" style="margin-top:0.5rem;display:inline-flex">Route öffnen ↗</a>
+      </div>
+      <div class="map-box">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2656!2d11.5612!3d48.2833!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x479e741b0b1c2a35%3A0x1a2b3c4d5e6f7a8b!2sAnna-Wimschneider-Str.%207%2C%2085716%20Unterschlei%C3%9Fheim!5e0!3m2!1sde!2sde!4v1700000000000!5m2!1sde!2sde"
+          loading="lazy"
+          allowfullscreen
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Königs Gaststätte auf Google Maps">
+        </iframe>
+        <div class="map-footer">
+          <span>Anna-Wimschneider-Str. 7 · 85716 Unterschleißheim</span>
+          <a href="https://maps.google.com/maps?q=Anna-Wimschneider-Stra%C3%9Fe+7,+85716+Unterschlei%C3%9Fheim" target="_blank">In Google Maps öffnen →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo">Königs<span>.</span></div>
+        <div class="footer-tagline">Internationale & deutsche Küche · Unterschleißheim</div>
+        <div class="footer-socials" style="margin-top:1rem">
+          <a href="https://www.instagram.com/koenigs_gaststaette/" target="_blank" title="Instagram">📸</a>
+          <a href="https://www.facebook.com/p/K%C3%B6nigs-Gastst%C3%A4tte-100054247880693/" target="_blank" title="Facebook">👍</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-links">
+          <h4>Navigation</h4>
+          <a href="#ueber">Über uns</a>
+          <a href="#speise">Speisekarte</a>
+          <a href="#bewertungen">Bewertungen</a>
+          <a href="#reservierung">Reservieren</a>
+          <a href="#anfahrt">Anfahrt</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-links">
+          <h4>Kontakt</h4>
+          <a href="tel:+4989310405">+49 89 3104050</a>
+          <a href="mailto:vera.juric40@gmail.com">vera.juric40@gmail.com</a>
+          <a href="https://www.instagram.com/koenigs_gaststaette/" target="_blank">Instagram ↗</a>
+          <a href="https://www.facebook.com/p/K%C3%B6nigs-Gastst%C3%A4tte-100054247880693/" target="_blank">Facebook ↗</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-links">
+          <h4>Öffnungszeiten</h4>
+          <a>Mo: Geschlossen</a>
+          <a>Di – So: 12:00 – 21:00 Uhr</a>
+          <a>Nur Barzahlung</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 Königs Gaststätte · Anna-Wimschneider-Str. 7 · 85716 Unterschleißheim</div>
+      <div class="footer-legal">
+        <a href="#">Impressum</a>
+        <a href="#">Datenschutz</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function toggleMenu() {
+    document.getElementById('mobileNav').classList.toggle('open');
+  }
+  function closeMenu() {
+    document.getElementById('mobileNav').classList.remove('open');
+  }
+  function switchTab(btn, id) {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.menu-panel').forEach(p => p.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById(id).classList.add('active');
+  }
+  function submitForm() {
+    const fields = ['fname','lname','date','time','phone','email'];
+    let valid = true;
+    fields.forEach(f => {
+      const el = document.getElementById(f);
+      if (!el.value.trim()) { el.style.borderColor = '#c0392b'; valid = false; }
+      else el.style.borderColor = '';
+    });
+    if (!valid) return;
+    const btn = document.querySelector('.form-btn');
+    btn.disabled = true; btn.textContent = '✓ Anfrage gesendet';
+    btn.style.background = '#2d7a4f'; btn.style.color = '#fff';
+    document.getElementById('successBanner').style.display = 'block';
+  }
+
+  // Set min date
+  const d = document.getElementById('date');
+  if (d) d.min = new Date().toISOString().split('T')[0];
+
+  // Highlight today's opening hours
+  const days = ['So','Mo','Di','Mi','Do','Fr','Sa'];
+  const today = new Date().getDay();
+  const dayMap = [6, 0, 1, 2, 3, 4, 5]; // JS getDay() -> zeiten-grid index
+  const items = document.querySelectorAll('.zt-item');
+  if (items[dayMap[today]]) items[dayMap[today]].classList.add('today');
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+</script>
+</body>
+</html>
